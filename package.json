@@ -1,0 +1,13 @@
+{
+  "name": "user-id-server",
+  "version": "1.0.0",
+  "description": "A User ID Server",
+  "scripts": {},
+  "keywords": [
+    "Server",
+    "user",
+    "identity"
+  ],
+  "author": "Anthony G",
+  "license": "ISC"
+}
