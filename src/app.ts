@@ -3,8 +3,10 @@ import cors from 'cors';
 import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
 import { errorMiddleware } from './middleware/errorMiddleware';
+import swaggerConfig from './swagger';
 
 const app = express();
+swaggerConfig(app);
 
 app.use(cors());
 app.use(express.json());
