@@ -5,12 +5,12 @@ services:
     ports:
       - '3004:3004'
     environment:
-      DB_NAME: "identity"
+      DB_NAME: ""
       DB_HOST: "posthosted"
       DB_USER: ""
       DB_PASS: ""
       DB_PORT: 5432
-      JWT_SECRET: "some_pretty😎secret"
+      JWT_SECRET: ""
       TOKEN_EXPIRY: '1h'
       RESET_TOKEN_EXPIRY: 1800000
       PORT: 3004
