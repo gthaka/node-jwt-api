@@ -7,7 +7,7 @@ const router = Router();
 
 // Signup and signin endpoints
 router.post('/signup', authController.signup);
-router.post('/signin', emailVerificationMiddleware, authController.signin);
+router.post('/signin', authMiddleware, authController.signin);
 
 // Password reset endpoints
 router.post('/forgot-password', authController.forgotPassword);
