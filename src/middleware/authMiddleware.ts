@@ -4,21 +4,27 @@ import userService from '../services/userService';
 import jwt from 'jsonwebtoken';
 
 export function authMiddleware(req: Request, res: Response, next: NextFunction): void | Response<any, Record<string, any>> {
-    const token = req.headers.authorization?.split(' ')[1]; // Assuming token is sent as "Bearer <token>"
 
-    if (!token) {
-        return res.status(401).json({ message: 'Authentication token missing' });
-    }
+    // Check if user is verified, except for the sign-in route
+    if (req.path !== '/signin') {
+        const token = req.headers.authorization?.split(' ')[1]; // Assuming token is sent as "Bearer <token>"
 
-    try {
-        const decodedToken = verifyToken(token);
+        if (!token) {
+            return res.status(401).json({ message: 'Authentication token missing' });
+        }
 
-        // Attach the decoded user ID to the request for future use
-        (req as any).userId = decodedToken.userId; // Type assertion to any
+        try {
+            const decodedToken = verifyToken(token);
 
+            // Attach the decoded user ID to the request for future use
+            (req as any).userId = decodedToken.userId; // Type assertion to any
+
+            next();
+        } catch (error) {
+            return res.status(401).json({ message: 'Invalid or expired token' });
+        }
+    } else {
         next();
-    } catch (error) {
-        return res.status(401).json({ message: 'Invalid or expired token' });
     }
 }
 
