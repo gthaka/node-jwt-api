@@ -11,7 +11,7 @@ export async function getUserDetails(req: Request, res: Response): Promise<void 
         }
 
         // Return the user details without sensitive information
-        const userWithoutPassword = { ...user, password: undefined };
+        const userWithoutPassword = { ...user, password: undefined, reset_token: undefined, reset_token_created_at: undefined, is_verified: undefined };
         res.json(userWithoutPassword);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
