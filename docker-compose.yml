@@ -1,0 +1,47 @@
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - '3004:3004'
+    environment:
+      DB_NAME: "identity"
+      DB_HOST: "posthosted"
+      DB_USER: "mtumishi"
+      DB_PASS: "some👥pass"
+      DB_PORT: 5432
+      JWT_SECRET: "some_pretty😎secret"
+      TOKEN_EXPIRY: '1h'
+      RESET_TOKEN_EXPIRY: 1800000
+      PORT: 3004
+      MAILER_HOST: "smtp.mailgun.org"
+      MAILER_PORT: 587
+      MAILER_MAIL: "postmaster@flani.mailgun"
+      MAILER_PASS: "some_mailed_password"
+      SYS_MAIL: "nodesys@sys.com"
+    depends_on:
+      - db
+    networks:
+      - nja-network
+
+  db:
+    image: postgres:15
+    hostname: posthosted
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      # user
+      DB_NAME: "identity"
+      DB_USER: "mtumishi"
+      DB_PASS: "some👥pass"
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d/
+    networks:
+      - nja-network
+
+networks:
+  nja-network:
+    driver: bridge
