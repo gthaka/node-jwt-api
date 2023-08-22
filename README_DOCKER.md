@@ -35,9 +35,9 @@ If you prefer using Docker, continue below
 
 ## Deployment Considerations
 
-    The [docker-compose.yml](docker-compose.yml) file is configured to use the official PostgreSQL 15 image and a custom Node.js 18 Alpine-based image. Adjust the versions and configurations as needed.
-    For production deployment, consider using a reverse proxy (e.g., Nginx) to handle SSL termination and load balancing.
-    Store sensitive environment variables securely, preferably using environment files or a secrets management tool.
+The [docker-compose.yml](docker-compose.yml) file is configured to use the official PostgreSQL 15 image and a custom Node.js 18 Alpine-based image. Adjust the versions and configurations as needed.
+For production deployment, consider using a reverse proxy (e.g., Nginx) to handle SSL termination and load balancing.
+Store sensitive environment variables securely, preferably using environment files or a secrets management tool.
 
 ## Documentation
 
