@@ -7,17 +7,17 @@ services:
     environment:
       DB_NAME: "identity"
       DB_HOST: "posthosted"
-      DB_USER: "mtumishi"
-      DB_PASS: "some👥pass"
+      DB_USER: ""
+      DB_PASS: ""
       DB_PORT: 5432
       JWT_SECRET: "some_pretty😎secret"
       TOKEN_EXPIRY: '1h'
       RESET_TOKEN_EXPIRY: 1800000
       PORT: 3004
-      MAILER_HOST: "smtp.mailgun.org"
+      MAILER_HOST: ""
       MAILER_PORT: 587
-      MAILER_MAIL: "postmaster@flani.mailgun"
-      MAILER_PASS: "some_mailed_password"
+      MAILER_MAIL: ""
+      MAILER_PASS: ""
       SYS_MAIL: "nodesys@sys.com"
     depends_on:
       - db
