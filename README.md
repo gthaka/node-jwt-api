@@ -18,13 +18,15 @@ This is a Node.js application built to handle user JWT tokens, and PostgreSQL fo
 - Node.js (Version 18.X.X)
 - PostgreSQL database
 
+**_[For Docker installation guide, Click Here](README_DOCKER.md)_**
+
 ## Installation
 
 1. Clone the repository:
 
    ```sh
    git clone https://github.com/gthaka/node-jwt-api.git
-   cd user-id-server
+   cd node-jwt-api
    ```
 
 2. Install dependencies:
