@@ -3,22 +3,22 @@ services:
   api:
     build: .
     ports:
-      - '3004:3004'
+      - '3004:${PORT}'
     environment:
-      DB_NAME: ""
-      DB_HOST: "posthosted"
-      DB_USER: ""
-      DB_PASS: ""
-      DB_PORT: 5432
-      JWT_SECRET: ""
-      TOKEN_EXPIRY: '1h'
-      RESET_TOKEN_EXPIRY: 1800000
-      PORT: 3004
-      MAILER_HOST: ""
-      MAILER_PORT: 587
-      MAILER_MAIL: ""
-      MAILER_PASS: ""
-      SYS_MAIL: "nodesys@sys.com"
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_PORT: ${DB_PORT}
+      JWT_SECRET: ${JWT_SECRET}
+      TOKEN_EXPIRY: ${TOKEN_EXPIRY}
+      RESET_TOKEN_EXPIRY: ${RESET_TOKEN_EXPIRY}
+      PORT: ${PORT}
+      MAILER_HOST: ${MAILER_HOST}
+      MAILER_PORT: ${MAILER_PORT}
+      MAILER_MAIL: ${MAILER_MAIL}
+      MAILER_PASS: ${MAILER_PASS}
+      SYS_MAIL: ${SYS_MAIL}
     depends_on:
       - db
     networks:
@@ -26,17 +26,17 @@ services:
 
   db:
     image: postgres:15
-    hostname: posthosted
+    hostname: ${DB_HOST}
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD:  ${POSTGRES_PASSWORD}
+      POSTGRES_DB:  ${POSTGRES_DB}
       # user
-      DB_NAME: "identity"
-      DB_USER: "mtumishi"
-      DB_PASS: "some👥pass"
+      DB_NAME:  ${DB_NAME}
+      DB_USER:  ${DB_USER}
+      DB_PASS:  ${DB_PASS}
     ports:
-      - '5432:5432'
+      - '5432:${DB_PORT}'
     volumes:
       - ./initdb:/docker-entrypoint-initdb.d/
     networks:
