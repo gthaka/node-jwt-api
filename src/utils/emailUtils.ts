@@ -43,7 +43,6 @@ async function sendVerificationEmail(toEmail: string, verificationToken: string)
         text: `Your verification token is: ${verificationToken}`,
     };
 
-    console.log("📬", mailOptions)
     try {
         await transporter.sendMail(mailOptions);
         console.log('Verification email sent successfully');
