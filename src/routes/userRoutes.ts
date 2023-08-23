@@ -4,7 +4,6 @@ import { authMiddleware, emailVerificationMiddleware } from '../middleware/authM
 
 const router = Router();
 
-// Protected route - requires authentication
 router.get('/details', authMiddleware, emailVerificationMiddleware, getUserDetails);
 
 export default router;
