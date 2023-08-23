@@ -1,6 +1,7 @@
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import express from 'express';
+import apiPaths from './apiPaths';
 
 const options: swaggerJsDoc.Options = {
     definition: {
@@ -25,6 +26,7 @@ const options: swaggerJsDoc.Options = {
                 },
             },
         },
+        paths: apiPaths,
     },
     apis: ['./src/routes/authRoutes.ts', './src/routes/userRoutes.ts'],
 };

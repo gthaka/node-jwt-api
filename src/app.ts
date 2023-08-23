@@ -3,7 +3,7 @@ import cors from 'cors';
 import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
 import { errorMiddleware } from './middleware/errorMiddleware';
-import swaggerConfig from './swagger';
+import swaggerConfig from './swagger/swagger-config';
 
 const app = express();
 swaggerConfig(app);

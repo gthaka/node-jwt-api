@@ -1,0 +1,355 @@
+export default {
+    '/auth/signup': {
+        post: {
+            summary: 'User sign-up',
+            tags: ['Authentication'],
+            requestBody: {
+                required: true,
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                username: {
+                                    type: 'string',
+                                },
+                                email: {
+                                    type: 'string',
+                                },
+                                password: {
+                                    type: 'string',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            responses: {
+                201: {
+                    description: 'Signup successful',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    message: {
+                                        type: 'string',
+                                    },
+                                    token: {
+                                        type: 'string',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                400: {
+                    description: 'Bad request',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+            },
+        },
+    },
+    '/auth/signin': {
+        post: {
+            summary: 'User sign-in',
+            tags: ['Authentication'],
+            requestBody: {
+                required: true,
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                username: {
+                                    type: 'string',
+                                },
+                                password: {
+                                    type: 'string',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            responses: {
+                200: {
+                    description: 'Signin successful',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    message: {
+                                        type: 'string',
+                                    },
+                                    token: {
+                                        type: 'string',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                400: {
+                    description: 'Bad request',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+                401: {
+                    description: 'Unauthorized',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+            },
+        },
+    },
+    '/auth/forgot-password': {
+        post: {
+            summary: 'Initiate password reset',
+            tags: ['Authentication'],
+            requestBody: {
+                required: true,
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                email: {
+                                    type: 'string',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            responses: {
+                200: {
+                    description: 'Reset token generated and sent',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    message: {
+                                        type: 'string',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                400: {
+                    description: 'Bad request',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+            },
+        },
+    },
+    '/auth/reset-password/{token}': {
+        post: {
+            summary: 'Reset password using token',
+            tags: ['Authentication'],
+            requestBody: {
+                required: true,
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                newPassword: {
+                                    type: 'string',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            parameters: [
+                {
+                    name: 'token',
+                    in: 'path',
+                    required: true,
+                },
+            ],
+            responses: {
+                200: {
+                    description: 'Password reset successful',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    message: {
+                                        type: 'string',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                400: {
+                    description: 'Bad request',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+                401: {
+                    description: 'Unauthorized',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+            },
+        },
+    },
+    '/auth/verify-email/{token}': {
+        get: {
+            summary: 'Verify user email using token',
+            tags: ['Authentication'],
+            parameters: [
+                {
+                    name: 'token',
+                    in: 'path',
+                    required: true,
+                },
+            ],
+            responses: {
+                200: {
+                    description: 'Email verification successful',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    message: {
+                                        type: 'string',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                400: {
+                    description: 'Bad request',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+            },
+        },
+    },
+    '/auth/resend-verification-email': {
+        post: {
+            summary: 'Resend email verification token',
+            tags: ['Authentication'],
+            requestBody: {
+                required: true,
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                email: {
+                                    type: 'string',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            responses: {
+                200: {
+                    description: 'Verification token resent',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    message: {
+                                        type: 'string',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                400: {
+                    description: 'Bad request',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+            },
+        },
+    },
+    '/users/details': {
+        get: {
+            summary: 'Get user details',
+            tags: ['User'],
+            security: [
+                {
+                    BearerAuth: [],
+                },
+            ],
+            responses: {
+                200: {
+                    description: 'User details fetched successfully',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    username: {
+                                        type: 'string',
+                                    },
+                                    email: {
+                                        type: 'string',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                401: {
+                    description: 'Unauthorized',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+                403: {
+                    description: 'Forbidden',
+                    content: {
+                        'application/json': {
+                            $ref: '#/components/schemas/Error',
+                        },
+                    },
+                },
+            },
+        },
+    },
+}
