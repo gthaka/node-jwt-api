@@ -15,11 +15,16 @@ If you prefer using Docker, continue below
    cd node-jwt-api
    ```
 
-2. Update the environment variables accordingly in the [docker-compose.yml](docker-compose.yml) file.
+2. Copy the [.env.sample](.env.sample) into `.env` file and edit them according to your specs.
+
+   ```
+   cp .env.sample .env
+   ```
 
 3. Build and run the Docker containers:
 
-   ```
+   ```\
+   docker-compose build &&\
    docker-compose up
    ```
 
