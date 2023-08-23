@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import authService from '../services/authService';
 import userService from '../services/userService';
 import { sendResetTokenEmail, sendVerificationEmail } from '../utils/emailUtils';
+import { isValidEmailFormat, validateUsername } from '../utils/validator';
 
 dotenv.config();
 
@@ -14,14 +15,21 @@ class AuthController {
         try {
             const { username, email, password } = req.body;
 
-            // Validate input data (e.g., check for required fields)
-            // Validate input data
             if (!username || !email || !password) {
                 res.status(400).json({ message: 'All fields are required' });
                 return;
             }
 
-            // Check if the username or email is already taken
+            if (!validateUsername(username)) {
+                res.status(400).json({ message: 'Username not valid' });
+                return;
+            }
+
+            if (!isValidEmailFormat(email)) {
+                res.status(400).json({ message: 'Email not valid' });
+                return;
+            }
+
             const existingUser = await userService.getUserByUsernameOrEmail(username, email);
             if (existingUser) {
                 res.status(409).json({ message: 'Username or email already taken' });
