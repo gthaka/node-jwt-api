@@ -52,4 +52,9 @@ async function sendVerificationEmail(toEmail: string, verificationToken: string)
     }
 }
 
-export { sendResetTokenEmail, sendVerificationEmail };
+function isValidEmailFormat(email: string): boolean {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+}
+
+export { sendResetTokenEmail, sendVerificationEmail, isValidEmailFormat };
