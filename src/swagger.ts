@@ -10,9 +10,23 @@ const options: swaggerJsDoc.Options = {
             version: '1.0.0',
             description: 'API documentation for Node JWT Server',
         },
-        basePath: '/api',
+        // basePath: '/api',
+        servers: [
+            {
+                url: '/api',
+            },
+        ],
+        components: {
+            securitySchemes: {
+                BearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
+        },
     },
-    apis: ['./src/routes/*.ts'],
+    apis: ['./src/routes/authRoutes.ts', './src/routes/userRoutes.ts'],
 };
 
 const swaggerSpec = swaggerJsDoc(options);
