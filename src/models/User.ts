@@ -1,12 +1,12 @@
 interface User {
     id: string;
     username: string;
-    email: string;
+    email?: string;
     password: string;
-    is_verified: boolean;
-    emailVerificationToken: string | null
-    resetToken: string | null;
-    resetTokenCreatedAt: Date | null;
+    is_verified?: boolean;
+    emailVerificationToken?: string | null
+    resetToken?: string | null;
+    resetTokenCreatedAt?: Date | null;
 }
 
 export default User;
