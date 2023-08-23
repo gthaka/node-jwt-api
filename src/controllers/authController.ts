@@ -5,7 +5,8 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import authService from '../services/authService';
 import userService from '../services/userService';
-import { isValidEmailFormat, sendResetTokenEmail, sendVerificationEmail } from '../utils/emailUtils';
+import { sendResetTokenEmail, sendVerificationEmail } from '../utils/emailUtils';
+import { isValidEmailFormat, validateUsername } from '../utils/validator';
 
 dotenv.config();
 
@@ -16,6 +17,11 @@ class AuthController {
 
             if (!username || !email || !password) {
                 res.status(400).json({ message: 'All fields are required' });
+                return;
+            }
+
+            if (!validateUsername(username)) {
+                res.status(400).json({ message: 'Username not valid' });
                 return;
             }
 
